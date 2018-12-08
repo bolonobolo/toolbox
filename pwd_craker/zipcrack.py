@@ -4,6 +4,8 @@ import zipfile
 import optparse
 from threading import Thread
 
+# This tool is usefull only when the zip file is protected by cleartext password (on linux with command zip -P)
+
 def extractFile(zFile, password):
 	try:
 		zFile.extractall(pwd=password)
