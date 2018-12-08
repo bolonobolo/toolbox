@@ -1,19 +1,18 @@
 #!/usr/bin/python
 
 import zipfile
-import sys
 import optparse
 from threading import Thread
 
-def extractFile(zFile, passsword):
+def extractFile(zFile, password):
 	try:
-		zFile.extracall(pwd=passsword)
+		zFile.extractall(pwd=password)
 		print "[*] Found password " + password + "\n"
 	except:
 		pass
 
 def main():
-	parser = optparse.OptionParser("usage%prog " + "-f <zipfile> -d <distionary>")
+	parser = optparse.OptionParser("usage%prog " + "-f <zipfile> -d <dictionary>")
 	parser.add_option("-f", dest="zname", type="string", help="specify zip file")
 	parser.add_option("-d", dest="dname", type="string", help="specify dictionary file")
 	(options, args) = parser.parse_args()
@@ -23,10 +22,12 @@ def main():
 	else:
 		zname = options.zname
 		dname = options.dname
-	zFile = zipfile.Zipfile(zname)
+	zFile = zipfile.ZipFile(zname)
 	passFile = open(dname)
-	for line in passFile():
+	for line in passFile.readlines():
+		print "[*] Cracking..."
 		password = line.strip("\n")
+		print "[*] tring password: " + password 
 		t = Thread(target=extractFile, args=(zFile, password))
 		t.start()
 
