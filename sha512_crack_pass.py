@@ -49,7 +49,7 @@ def testPass(line):
 
 def main():
 	if len(sys.argv) != 3:
-		print "Usage: unix_crack_pass.py <dictionary> <shadow file>"
+		print "Usage: sha512_crack_pass.py <dictionary> <shadow file>"
 		return
 	else:	
 		passFile = open(sys.argv[2])		
