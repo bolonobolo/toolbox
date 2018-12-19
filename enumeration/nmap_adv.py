@@ -6,7 +6,7 @@ import nmap
 
 def grabBanner(tgtHost, tgtPort):
 	connSkt = socket(AF_INET, SOCK_STREAM)
-	connSkt.settimeout(10)
+	connSkt.settimeout(3)
 	try:
 		connSkt.connect((tgtHost, int(tgtPort)))
 		connSkt.send("bolowashere\r\n")
@@ -24,14 +24,14 @@ def checkTgtStatus(tgtHost):
 def parseOptions():
 	parser = optparse.OptionParser("usage %prog -H " + "<target host> -p <target port> -u <use udp prot> (Optional) -b <grab banner> (Optional) -w <file to write> (Optional)")
 	parser.add_option("-H", dest="tgtHost", type="string", help="specify target host")
-	parser.add_option("-p", dest="tgtPort", type="string", help="specify target port")
+	parser.add_option("-p", dest="tgtPort", type="string", help="specify target port, all for 1-65534")
 	parser.add_option("-w", dest="writeFile", type="string", help="write to file")
 	parser.add_option("-u", action="store_true", dest="scanPrt", help="specify udp protocol", default=False)
-	parser.add_option("-b", action="store_true", dest="banGrab", help="tell scan to grab banner", default=False)
+	parser.add_option("-b", action="store_true", dest="banGrab", help="tell scanner to grab banner", default=False)
 	return parser
 
 def nmapScan(tgtHost, tgtPort, options):
-	arguments = "-sS -Pn"
+	arguments = "-sS -Pn --open"
 	scanPrt = options.scanPrt
 	banGrab = options.banGrab
 	writeFile = options.writeFile
@@ -59,6 +59,7 @@ def main():
 	parser = parseOptions()
 	(options, args) = parser.parse_args()
 	tgtHost = options.tgtHost
+	# TODO implement the all ports option
 	tgtPorts = str(options.tgtPort).split(",")
 	if (tgtHost == None) | (tgtPorts[0] == None):
 		print parser.usage
