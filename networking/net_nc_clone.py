@@ -20,7 +20,7 @@ def run_command(command):
 	
 	# trim the new line
 	command = command.rstrip()
-
+	print "[*] Processing command: %s" % command
 	# run the command and get the oputput back
 	try:
 		output = subprocess.check_output(command,stderr=subprocess.STDOUT, shell=True)
@@ -60,7 +60,6 @@ def client_handler(client_socket):
 
 	# check for command execution
 	if len(execute):
-
 		# run the command
 		output = run_command(execute)
 		client_socket.send(output)
@@ -97,6 +96,7 @@ def server_loop():
 
 	while True:
 		client_socket, addr = server.accept()
+		print "[*] Accept connection from: %s:%d" % (addr[0],addr[1])
 
 		# spin off a thread to handle our new client
 		client_thread = threading.Thread(target=client_handler, args=(client_socket,))
@@ -145,13 +145,13 @@ def usage():
 	print "-l --listen					- listen on [host]:[port] for incoming connections"
 	print "-e --execute=<file to run>	- execute the given file upon receiving a connection"
 	print "-c --command 				- initialize a command shell"
-	print "-u --upload=<destination>	- upom receiving a connection upload a file and write it to <destination>"
+	print "-u --upload=<destination>	- upon receiving a connection upload a file and write it to <destination>"
 	print
 	print
 	print "Examples: "
-	print "net_nc_clone.py - 102.168.0.10 -p 5555 -l -c"
-	print "net_nc_clone.py - 102.168.0.10 -p 5555 -l -u=c:\\target.exe"
-	print "net_nc_clone.py - 102.168.0.10 -p 5555 -l -e=\"cat /etc/passwd\""
+	print "net_nc_clone.py -t 192.168.0.10 -p 5555 -l -c"
+	print "net_nc_clone.py -t 192.168.0.10 -p 5555 -l -u c:\\target.exe"
+	print "net_nc_clone.py -t 192.168.0.10 -p 5555 -l -e \"cat /etc/passwd\""
 	print "echo 'ABCDEFG' | ./net_nc_clone.py -t 192.168.0.10 -p 135"
 	sys.exit(0)
 
@@ -197,7 +197,7 @@ def main():
 
 	if not listen and len(target) and port > 0:
 		# read the buffer from command line
-		# send CTRL-D if not sending inpit ti stdin
+		# send CTRL-D if not sending input to stdin
 		buffer = sys.stdin.read()
 
 		# send data off
