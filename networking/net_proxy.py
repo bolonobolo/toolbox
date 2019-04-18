@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 
 import sys
 import socket
@@ -127,7 +127,7 @@ def main():
 		print "Usage: ./net_proxy.py <local_host> <local_port> <remote_host> <remote_port> <receive_first>"
 		print "Example: ./net_proxy 127.0.0.1 9999 192.168.0.10 80 True"
 		sys.exit(0)
-		
+
 	# setup local listening parameters
 	local_host = sys.argv[1]
 	local_port = int(sys.argv[2])
