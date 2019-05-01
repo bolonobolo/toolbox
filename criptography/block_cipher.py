@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 # Block Ciphers script
-# the IV is taken randomly from the library
 
 from Crypto.Cipher import DES
 from Crypto.Cipher import DES3
