@@ -1,5 +1,16 @@
 #!/usr/bin/python
 
+# Tool for port scan, banner grabbing and homepage screenshot
+# 
+# Requierments:
+# 	- python 2.7.x
+# 		https://www.python.org/downloads/
+# 	- webscreenshot.py
+# 		pip install webscreenshot
+# 
+# Remember to install python with pip and to enable automatic PATH modification to avoid troubles
+
+
 import optparse
 import socket
 from socket import *
