@@ -55,10 +55,10 @@ def portScan(tgtHost, tgtPorts, banGrab, screenSh):
 			# t2 = Thread(target=retBanner, args=(tgtHost, int(tgtPort)))
 			# t2.start()
 		if (screenSh == True and (int(tgtPort) == 443 or int(tgtPort) == 80)):
-			# print("webscreenshot.exe http://" + tgtHost + ":" + tgtPort)
+			print("\nAcquiring screenshots...")
 			os.system("webscreenshot.exe http://" + tgtHost + ":" + tgtPort + " > NUL")	
 def main():
-	parser = optparse.OptionParser("usage %prog -H " + "<target host> -p <target port>")
+	parser = optparse.OptionParser("usage %prog -H " + "<target host> -p <target port> or -f <path_to_IP_list> (optional -s for page screenshot, -b for banner grab)")
 	parser.add_option("-H", dest="tgtHost", type="string", help="specify target host")
 	parser.add_option("-p", dest="tgtPort", type="string", help="specify target port")
 	parser.add_option("-f", dest="tgtFile", type="string", help="specify targets file")
@@ -79,7 +79,6 @@ def main():
   			tgtPorts = str(tgtPorts).split(",")
 			portScan(tgtHost, tgtPorts, banGrab, False)
 		if (screenSh == True):
-			print("\nAcquiring screenshots...")
 			os.system("webscreenshot.exe -i " + tgtFile)
 		file.close()
 	else:	
