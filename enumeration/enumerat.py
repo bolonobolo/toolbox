@@ -9,6 +9,7 @@
 # 		pip install webscreenshot
 # 
 # Remember to install python with pip and to enable automatic PATH modification to avoid troubles
+# the eventual IPs list should be in the format IP:port
 
 
 import optparse
